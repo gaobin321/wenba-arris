@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/wenba-arris.iml" filepath="$PROJECT_DIR$/wenba-arris.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wenba-arris-api/wenba-arris-api.iml" filepath="$PROJECT_DIR$/wenba-arris-api/wenba-arris-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wenba-arris-rpc/wenba-arris-rpc.iml" filepath="$PROJECT_DIR$/wenba-arris-rpc/wenba-arris-rpc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wenba-arris-rpc-client/wenba-arris-rpc-client.iml" filepath="$PROJECT_DIR$/wenba-arris-rpc-client/wenba-arris-rpc-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wenba-arris-service/wenba-arris-service.iml" filepath="$PROJECT_DIR$/wenba-arris-service/wenba-arris-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wenba-arris-web/wenba-arris-web.iml" filepath="$PROJECT_DIR$/wenba-arris-web/wenba-arris-web.iml" />
+    </modules>
+  </component>
+</project>

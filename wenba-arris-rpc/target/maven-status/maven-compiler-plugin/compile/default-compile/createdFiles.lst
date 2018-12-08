@@ -1,0 +1,4 @@
+com/wenba/arris/rpc/service/UserServiceProvider.class
+com/wenba/arris/DubboBootStrap.class
+com/wenba/arris/rpc/service/ArrisInfoServiceProvider.class
+com/wenba/arris/rpc/service/ArrisExprServiceProvider.class

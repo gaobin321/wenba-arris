@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wenba.arris.dao.ArrisInfoDao">
+
+  <resultMap id="BaseResultMap" type="com.wenba.arris.dto.ArrisInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="arris_name" jdbcType="VARCHAR" property="arrisName" />
+    <result column="arris_vers" jdbcType="INTEGER" property="arrisVers" />
+    <result column="arris_desc" jdbcType="VARCHAR" property="arrisDesc" />
+    <result column="arris_state" jdbcType="TINYINT" property="arrisState" />
+    <result column="create_id" jdbcType="INTEGER" property="createId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_id" jdbcType="INTEGER" property="updateId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="ext" jdbcType="VARCHAR" property="ext" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, arris_name, arris_vers, arris_desc, arris_state, create_id, DATE_FORMAT(create_time,"%Y-%m-%d") create_time, update_id,
+    DATE_FORMAT(update_time,"%Y-%m-%d") update_time, ext
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from arris_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from arris_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.wenba.arris.dto.ArrisInfo">
+    insert into arris_info (id, arris_name, arris_vers, 
+      arris_desc, arris_state, create_id, 
+      create_time, update_id, update_time, 
+      ext)
+    values (#{id,jdbcType=INTEGER}, #{arrisName,jdbcType=VARCHAR}, #{arrisVers,jdbcType=INTEGER}, 
+      #{arrisDesc,jdbcType=VARCHAR}, #{arrisState,jdbcType=TINYINT}, #{createId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{ext,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.wenba.arris.dto.ArrisInfo">
+    insert into arris_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="arrisName != null">
+        arris_name,
+      </if>
+      <if test="arrisVers != null">
+        arris_vers,
+      </if>
+      <if test="arrisDesc != null">
+        arris_desc,
+      </if>
+      <if test="arrisState != null">
+        arris_state,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateId != null">
+        update_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="ext != null">
+        ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="arrisName != null">
+        #{arrisName,jdbcType=VARCHAR},
+      </if>
+      <if test="arrisVers != null">
+        #{arrisVers,jdbcType=INTEGER},
+      </if>
+      <if test="arrisDesc != null">
+        #{arrisDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="arrisState != null">
+        #{arrisState,jdbcType=TINYINT},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        #{updateId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        #{ext,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.wenba.arris.dto.ArrisInfo">
+    update arris_info
+    <set>
+      <if test="arrisName != null">
+        arris_name = #{arrisName,jdbcType=VARCHAR},
+      </if>
+      <if test="arrisVers != null">
+        arris_vers = #{arrisVers,jdbcType=INTEGER},
+      </if>
+      <if test="arrisDesc != null">
+        arris_desc = #{arrisDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="arrisState != null">
+        arris_state = #{arrisState,jdbcType=TINYINT},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        update_id = #{updateId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        ext = #{ext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.wenba.arris.dto.ArrisInfo">
+    update arris_info
+    set arris_name = #{arrisName,jdbcType=VARCHAR},
+      arris_vers = #{arrisVers,jdbcType=INTEGER},
+      arris_desc = #{arrisDesc,jdbcType=VARCHAR},
+      arris_state = #{arrisState,jdbcType=TINYINT},
+      create_id = #{createId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_id = #{updateId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      ext = #{ext,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <!-- 获取表达式列表总记录数量 -->
+  <select id="selArrisInfoListNum" parameterType="com.wenba.arris.dto.ArrisInfo" resultType="int">
+    select
+    count(id) as total
+    from arris_info
+    <where>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+      <if test = "arrisVers != null and arrisVers != ''">
+        and arris_vers = #{arrisVers}
+      </if>
+      <if test = "arrisName != null and arrisName != ''">
+        and arris_name = #{arrisName}
+      </if>
+
+      <if test = "create_start != null and create_start != ''">
+        <if test = "create_end != null and create_end != ''">
+          and create_time BETWEEN #{create_start} AND #{create_end}
+        </if>
+        <if test = "create_end == null or create_end == ''">
+          and create_time &gt; #{create_start}
+        </if>
+      </if>
+
+      <if test = "create_end != null and create_end != ''">
+        <if test = "create_start == null or create_start == ''">
+          AND create_time &lt; #{create_end}
+        </if>
+      </if>
+    </where>
+
+  </select>
+
+
+  <!-- 查询表达式列表 -->
+  <select id="selArrisInfoList" parameterType="com.wenba.arris.dto.ArrisInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from arris_info
+    <where>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+      <if test = "arrisVers != null and arrisVers != ''">
+        and arris_vers = #{arrisVers}
+      </if>
+      <if test = "arrisName != null and arrisName != ''">
+        and arris_name = #{arrisName}
+      </if>
+
+      <if test = "create_start != null and create_start != ''">
+        <if test = "create_end != null and create_end != ''">
+          and create_time BETWEEN #{create_start} AND #{create_end}
+        </if>
+        <if test="create_end == null or create_end == ''">
+          and create_time &gt; #{create_start}
+        </if>
+      </if>
+
+      <if test="create_end != null and create_end != ''">
+        <if test="create_start == null or create_start == ''">
+          AND create_time &lt; #{create_end}
+        </if>
+      </if>
+    </where>
+    limit #{pageNumber},#{pageSize}
+  </select>
+
+
+  <!-- 检验表达式版本和表达式名称 -->
+  <select id="checkArrisVN" parameterType="com.wenba.arris.dto.ArrisInfo" resultType="int">
+    select count(1) as count
+      from arris_info
+    where
+          arris_vers = #{arrisVers}
+      and arris_name = #{arrisName}
+  </select>
+
+
+  <!-- 新增表达式 -->
+  <!--<insert id="insArrisInfoList" parameterType="com.wenba.arris.dto.ArrisInfo">
+    insert into arris_info
+    (arris_name, arris_vers,
+    arris_desc, arris_state,
+    create_id, ext)
+    values
+      (#{arrisName,jdbcType=VARCHAR},#{arrisVers,jdbcType=VARCHAR},
+       #{arrisDesc,jdbcType=VARCHAR}, 1,
+      #{createId,jdbcType=INTEGER}, #{ext,jdbcType=VARCHAR})
+  </insert>-->
+
+  <insert id="insArrisInfoList" parameterType="com.wenba.arris.dto.ArrisInfo">
+    insert into arris_info
+    (arris_name, arris_vers,
+    arris_desc, arris_state,
+    create_id, ext)
+    values
+    <foreach item="item" collection="list" separator=",">
+      ( #{item.arrisName,jdbcType=VARCHAR},#{item.arrisVers,jdbcType=VARCHAR},
+      #{item.arrisDesc,jdbcType=VARCHAR}, 1,
+      #{item.createId,jdbcType=INTEGER}, #{item.ext,jdbcType=VARCHAR} )
+    </foreach>
+  </insert>
+
+
+  <!-- 更新表达式 -->
+  <!--<update id="updArrisInfoList" parameterType="com.wenba.arris.dto.ArrisInfo" >
+    update arris_info
+    <set>
+      update_time = now(),
+      <if test="arrisName != null and arrisName != ''">
+        arris_name = #{arrisName},
+      </if>
+      <if test="arrisVers != null and arrisVers != ''">
+        arris_vers = #{arrisVers},
+      </if>
+      <if test="arrisDesc != null and arrisDesc != ''">
+        arris_desc = #{arrisDesc},
+      </if>
+      <if test="arrisState != null and arrisState != ''">
+        arris_state = #{arrisState},
+      </if>
+      <if test="createId != null and createId != ''">
+        create_id = #{createId},
+      </if>
+      <if test="createTime != null and createTime != ''">
+        create_time = #{createTime},
+      </if>
+      <if test="updateId != null and updateId != ''">
+        update_id = #{updateId},
+      </if>
+      <if test="ext != null and ext != ''">
+        ext = #{ext},
+      </if>
+    </set>
+    <where>
+      id = #{id}
+    </where>
+  </update>-->
+
+  <update id="updArrisInfoList" parameterType="java.util.List" statementType="STATEMENT">
+    <foreach collection="list" item="item" separator=";">
+      update arris_info
+      <set>
+        update_time = now(),
+        <if test="item.arrisName != null and item.arrisName != ''">
+          arris_name = '${item.arrisName}',
+        </if>
+        <if test="item.arrisVers != null and item.arrisVers != ''">
+          arris_vers = ${item.arrisVers},
+        </if>
+        <if test="item.arrisDesc != null and item.arrisDesc != ''">
+          arris_desc = '${item.arrisDesc}',
+        </if>
+        <if test="item.arrisState != null and item.arrisState != ''">
+          arris_state = ${item.arrisState},
+        </if>
+        <if test="item.createId != null and item.createId != ''">
+          create_id = ${item.createId},
+        </if>
+        <if test="item.createTime != null and item.createTime != ''">
+          create_time = '${item.createTime}',
+        </if>
+        <if test="item.updateId != null and item.updateId != ''">
+          update_id = ${item.updateId},
+        </if>
+        <if test="item.ext != null and item.ext != ''">
+          ext = '${item.ext}',
+        </if>
+      </set>
+      <where>
+        <if test="item.id != null and item.id != ''">
+          and id = ${item.id}
+        </if>
+      </where>
+    </foreach>
+  </update>
+
+
+  <!-- 删除表达式 -->
+  <!--<delete id="delArrisInfoList" parameterType="com.wenba.arris.dto.ArrisInfo" >
+    delete
+    from arris_info
+    <where>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+      <if test = "arrisVers != null and arrisVers != ''">
+        and arris_vers = #{arrisVers}
+      </if>
+      <if test = "arrisName != null and arrisName != ''">
+        and arris_name = #{arrisName}
+      </if>
+    </where>
+  </delete>-->
+
+  <delete id="delArrisInfoList" parameterType="java.util.List">
+    delete
+    FROM arris_info
+    <where>
+      <if test="pList != null and pList.size()>0">
+        and id in
+        <foreach item="item" collection="pList" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+      </if>
+    </where>
+  </delete>
+
+  <!--<delete id="delArrisInfoList" parameterType="java.util.List">
+    delete
+    FROM arris_info
+    <where>
+      <foreach collection="list" item="item" separator=" or ">
+        (
+        <if test="item.id != null">
+          id = #{item.id}
+        </if>
+        )
+      </foreach>
+    </where>
+  </delete>-->
+
+
+  <!-- 检验表达式是否存在 -->
+  <select id="checkArrisID" parameterType="int" resultType="int">
+    select count(1) as count
+      from arris_info
+    where
+          id = #{id}
+  </select>
+
+  <!-- 校验表达式是否改变 -->
+  <select id="checkArrisDet" resultType="int">
+    select count(1) as count
+      from arris_info
+    where
+          id = #{id}
+          and arris_detail = #{arrisDetail}
+    </select>
+
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <excludeFromCompile>
+      <directory url="file://$PROJECT_DIR$/target/generated-sources/archetype/src/main/resources/archetype-resources" includeSubdirectories="true" />
+    </excludeFromCompile>
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="wenba-arris-api" />
+        <module name="wenba-arris-rpc" />
+        <module name="wenba-arris-rpc-client" />
+        <module name="wenba-arris-service" />
+        <module name="wenba-arris-web" />
+        <module name="wenba-com.wenba.arris-rpc" />
+        <module name="wenba-com.wenba.arris-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="wbThrift" target="1.8" />
+      <module name="wenba-arris" target="1.8" />
+      <module name="wenba-arris-api" target="1.8" />
+      <module name="wenba-arris-archetype" target="1.5" />
+      <module name="wenba-arris-rpc" target="1.8" />
+      <module name="wenba-arris-rpc-client" target="1.8" />
+      <module name="wenba-arris-rpc-client-test" target="1.8" />
+      <module name="wenba-arris-service" target="1.8" />
+      <module name="wenba-arris-web" target="1.8" />
+      <module name="wenba-com.wenba.arris-rpc" target="1.8" />
+      <module name="wenba-com.wenba.arris-service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="wbThrift" options="-parameters" />
+      <module name="wenba-arris" options="" />
+      <module name="wenba-arris-api" options="" />
+      <module name="wenba-arris-rpc" options="" />
+      <module name="wenba-arris-rpc-client" options="" />
+      <module name="wenba-arris-rpc-client-test" options="-parameters" />
+      <module name="wenba-arris-service" options="" />
+      <module name="wenba-arris-web" options="" />
+      <module name="wenba-com.wenba.arris-rpc" options="-parameters" />
+      <module name="wenba-com.wenba.arris-service" options="-parameters" />
+    </option>
+  </component>
+</project>

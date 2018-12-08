@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wenba.arris.dao.ArrisExprDao">
+
+  <resultMap id="BaseResultMap" type="com.wenba.arris.dto.ArrisExpr">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="info_id" jdbcType="INTEGER" property="infoId" />
+    <result column="arris_detail" jdbcType="VARCHAR" property="arrisDetail" />
+    <result column="expr_vers" jdbcType="INTEGER" property="exprVers" />
+    <result column="create_id" jdbcType="INTEGER" property="createId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_id" jdbcType="INTEGER" property="updateId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="ext" jdbcType="VARCHAR" property="ext" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, info_id, arris_detail, expr_vers, create_id, create_time, update_id, update_time, 
+    ext
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from arris_expr
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from arris_expr
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.wenba.arris.dto.ArrisExpr">
+    insert into arris_expr (id, info_id, arris_detail, 
+      expr_vers, create_id, create_time, 
+      update_id, update_time, ext
+      )
+    values (#{id,jdbcType=INTEGER}, #{infoId,jdbcType=INTEGER}, #{arrisDetail,jdbcType=VARCHAR}, 
+      #{exprVers,jdbcType=INTEGER}, #{createId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{ext,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.wenba.arris.dto.ArrisExpr">
+    insert into arris_expr
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="infoId != null">
+        info_id,
+      </if>
+      <if test="arrisDetail != null">
+        arris_detail,
+      </if>
+      <if test="exprVers != null">
+        expr_vers,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateId != null">
+        update_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="ext != null">
+        ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="infoId != null">
+        #{infoId,jdbcType=INTEGER},
+      </if>
+      <if test="arrisDetail != null">
+        #{arrisDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="exprVers != null">
+        #{exprVers,jdbcType=INTEGER},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        #{updateId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        #{ext,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.wenba.arris.dto.ArrisExpr">
+    update arris_expr
+    <set>
+      <if test="infoId != null">
+        info_id = #{infoId,jdbcType=INTEGER},
+      </if>
+      <if test="arrisDetail != null">
+        arris_detail = #{arrisDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="exprVers != null">
+        expr_vers = #{exprVers,jdbcType=INTEGER},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        update_id = #{updateId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null">
+        ext = #{ext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.wenba.arris.dto.ArrisExpr">
+    update arris_expr
+    set info_id = #{infoId,jdbcType=INTEGER},
+      arris_detail = #{arrisDetail,jdbcType=VARCHAR},
+      expr_vers = #{exprVers,jdbcType=INTEGER},
+      create_id = #{createId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_id = #{updateId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      ext = #{ext,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+  <!-- 获取表达式详情列表总记录数量 -->
+  <select id="selArrisExprListNum" parameterType="com.wenba.arris.dto.ArrisExpr" resultType="int">
+    select
+    count(id) as total
+    from arris_expr
+    <where>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+      <if test = "exprVers != null and exprVers != ''">
+        and expr_vers = #{exprVers}
+      </if>
+
+      <if test = "create_start != null and create_start != ''">
+        <if test = "create_end != null and create_end != ''">
+          and create_time BETWEEN #{create_start} AND #{create_end}
+        </if>
+        <if test = "create_end == null or create_end == ''">
+          and create_time &gt; #{create_start}
+        </if>
+      </if>
+
+      <if test = "create_end != null and create_end != ''">
+        <if test = "create_start == null or create_start == ''">
+          AND create_time &lt; #{create_end}
+        </if>
+      </if>
+    </where>
+
+  </select>
+
+
+  <!-- 查询表达式详情列表 -->
+  <select id="selArrisExprList" parameterType="com.wenba.arris.dto.ArrisExpr" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from arris_expr
+    <where>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+      <if test = "exprVers != null and exprVers != ''">
+        and expr_vers = #{exprVers}
+      </if>
+
+      <if test = "create_start != null and create_start != ''">
+        <if test = "create_end != null and create_end != ''">
+          and create_time BETWEEN #{create_start} AND #{create_end}
+        </if>
+        <if test="create_end == null or create_end == ''">
+          and create_time &gt; #{create_start}
+        </if>
+      </if>
+
+      <if test="create_end != null and create_end != ''">
+        <if test="create_start == null or create_start == ''">
+          AND create_time &lt; #{create_end}
+        </if>
+      </if>
+    </where>
+    limit #{pageNumber},#{pageSize}
+  </select>
+
+
+  <!-- 检验表达式详情版本 -->
+  <select id="checkArrisVNExprV" parameterType="com.wenba.arris.dto.ArrisExpr" resultType="int">
+    select count(1) as count
+      from arris_expr
+    where
+          info_id = #{infoId}
+      and expr_vers = #{exprVers}
+  </select>
+
+
+  <!-- 新增表达式详情 -->
+  <insert id="insArrisExprList" parameterType="com.wenba.arris.dto.ArrisExpr">
+    insert into arris_expr
+    (info_id, arris_detail,
+      expr_vers, create_id, ext
+      )
+    values
+      (#{infoId,jdbcType=INTEGER}, #{arrisDetail,jdbcType=VARCHAR},
+      #{exprVers,jdbcType=INTEGER}, #{createId,jdbcType=INTEGER}, #{ext,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <!-- 更新表达式详情 -->
+  <!--<update id="updArrisExprList" parameterType="com.wenba.arris.dto.ArrisExpr" >
+    update arris_expr
+    <set>
+      update_time = now(),
+      <if test="infoId != null and infoId != ''">
+        info_id = #{infoId,jdbcType=INTEGER},
+      </if>
+      <if test="arrisDetail != null and arrisDetail != ''">
+        arris_detail = #{arrisDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="exprVers != null and exprVers != ''">
+        expr_vers = #{exprVers,jdbcType=INTEGER},
+      </if>
+      <if test="createId != null and createId != ''">
+        create_id = #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null and createTime != ''">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null and updateId != ''">
+        update_id = #{updateId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null and updateTime != ''">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext != null and ext != ''">
+        ext = #{ext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <where>
+      id = #{id}
+    </where>
+  </update>-->
+
+  <update id="updArrisExprList" parameterType="java.util.List" statementType="STATEMENT">
+    <foreach collection="list" item="item" separator=";">
+      update arris_expr
+      <set>
+        update_time = now(),
+        <if test="item.infoId != null and item.infoId != ''">
+          info_id = ${item.infoId},
+        </if>
+        <if test="item.arrisDetail != null and item.arrisDetail != ''">
+          arris_detail = '${item.arrisDetail}',
+        </if>
+        <if test="item.exprVers != null and item.exprVers != ''">
+          expr_vers = ${item.exprVers},
+        </if>
+        <if test="item.createId != null and item.createId != ''">
+          create_id = ${item.createId},
+        </if>
+        <if test="item.createTime != null and item.createTime != ''">
+          create_time = '${item.createTime}',
+        </if>
+        <if test="item.updateId != null and item.updateId != ''">
+          update_id = ${item.updateIditem.},
+        </if>
+        <if test="item.ext != null and item.ext != ''">
+          ext = '${item.ext}',
+        </if>
+      </set>
+      <where>
+        <if test="item.id != null and item.id != ''">
+          and id = ${item.id}
+        </if>
+      </where>
+    </foreach>
+  </update>
+
+
+  <!-- 查询表达式详情版本 -->
+  <select id="selArrisExprV" parameterType="com.wenba.arris.dto.ArrisExpr" resultType="int">
+    select if(count(expr_vers) > 0,(
+      select expr_vers
+        from arris_expr
+        <where>
+          info_id = #{infoId}
+        </where>
+        order by expr_vers desc
+        limit 1
+      ),0) as total
+    from arris_expr
+    <where>
+      info_id = #{infoId}
+    </where>
+
+  </select>
+
+
+  <!-- 删除表达式详情 -->
+  <!--<delete id="delArrisExprList" parameterType="com.wenba.arris.dto.ArrisExpr" >
+    delete
+    from arris_expr
+    <where>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+      <if test = "infoId != null and infoId != ''">
+        and info_id = #{infoId}
+      </if>
+      <if test = "exprVers != null and exprVers != ''">
+        and expr_vers = #{exprVers}
+      </if>
+    </where>
+  </delete>-->
+
+  <delete id="delArrisExprList" parameterType="java.util.List">
+    delete
+    FROM arris_expr
+    <where>
+      <if test="pList != null and pList.size()>0">
+        and id in
+        <foreach item="item" collection="pList" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+      </if>
+    </where>
+  </delete>
+
+
+  <!-- 检验表达式详情是否存在 -->
+  <select id="checkArrisExprID" parameterType="int" resultType="int">
+    select count(1) as count
+      from arris_expr
+    where
+          id = #{id}
+  </select>
+
+
+  <!-- 查询出需要执行的表达式详情 -->
+  <select id="selArrisExprDetael" parameterType="int" resultType="String">
+    select
+      arris_detail
+    from arris_expr
+    <where>
+      id = #{id}
+    </where>
+  </select>
+</mapper>

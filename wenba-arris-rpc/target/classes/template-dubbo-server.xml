@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       http://dubbo.apache.org/schema/dubbo
+       http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+    <dubbo:application name="${spring.application.name}"/>
+    <dubbo:registry address="zookeeper://10.2.1.154:2181"/>
+    <dubbo:protocol name="dubbo" port="20800"/>
+    <!-- 声明需要暴露的服务接口 -->
+    <dubbo:service interface="com.wenba.arris.service.UserServiceFacade" ref="userServiceFacade" />
+    <dubbo:service interface="com.wenba.arris.service.ArrisInfoServiceFacade" ref="arrisInfoServiceFacade" />
+    <dubbo:service interface="com.wenba.arris.service.ArrisExprServiceFacade" ref="arrisExprServiceFacade" />
+
+    <!-- 和本地bean一样实现服务 -->
+    <bean id="userServiceFacade" class="com.wenba.arris.rpc.service.UserServiceProvider" />
+    <bean id="arrisInfoServiceFacade" class="com.wenba.arris.rpc.service.ArrisInfoServiceProvider" />
+    <bean id="arrisExprServiceFacade" class="com.wenba.arris.rpc.service.ArrisExprServiceProvider" />
+</beans>

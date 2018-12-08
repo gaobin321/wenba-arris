@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       http://dubbo.apache.org/schema/dubbo
+       http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+    <dubbo:application name="${spring.application.name}"/>
+    <dubbo:registry address="zookeeper://10.2.1.154:2181" />
+    <dubbo:protocol name="dubbo" port="20800" />
+    <dubbo:reference id="userServiceFacade" interface="com.wenba.arris.service.UserServiceFacade" />
+    <dubbo:reference id="arrisInfoServiceFacade" interface="com.wenba.arris.service.ArrisInfoServiceFacade" />
+    <dubbo:reference id="arrisExprServiceFacade" interface="com.wenba.arris.service.ArrisExprServiceFacade" />
+</beans>
