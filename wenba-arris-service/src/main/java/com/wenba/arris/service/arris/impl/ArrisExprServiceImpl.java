@@ -1,5 +1,8 @@
 package com.wenba.arris.service.arris.impl;
 
+import com.alibaba.fastjson.TypeReference;
+import com.wenba.arris.common.utils.http.*;
+import com.wenba.arris.common.utils.json.FastJsonUtil;
 import com.wenba.arris.dao.ArrisExprDao;
 import com.wenba.arris.dto.ArrisExpr;
 import com.wenba.arris.expression.Expression;
@@ -122,14 +125,75 @@ public class ArrisExprServiceImpl implements ArrisExprService {
                     resultMap.put(id,dResult);
                 }else {
                     StringBuffer sb = new StringBuffer();
+
                     for(Valuable result : resList) {
-                        sb.append(result.getValue());
+                        if(null != result && !"".equals(result)) {
+                            sb.append(result.getValue() + ",");
+                        }
                     }
-                    dResult.setCode(1);
-                    dResult.setMsg("success");
-                    dResult.setData(sb.toString());
-                    resultMap.put(id,dResult);
-                    log.info("该ID:" + id + "----->表达式输出结果: " + sb.toString());
+                    sb.deleteCharAt(sb.length()-1);
+
+                    if(null != sb && sb.length() > 0) {
+                        dResult.setCode(1);
+                        dResult.setMsg("success");
+                        dResult.setData(sb.toString());
+                        resultMap.put(id,dResult);
+                        log.info("该ID:" + id + "----->表达式输出结果: " + sb.toString());
+                    }else {
+                        dResult.setCode(-1);
+                        dResult.setMsg("fail");
+                        resultMap.put(id,dResult);
+                        log.info("该ID:" + id + "----->表达式输出结果: 未查询到满足条件的结果!");
+                    }
+
+
+                    /**
+                     *  调用 标签服务 打标
+                     */
+
+                    Map<String,String> params = new HashMap<>();
+
+                    //测试数据
+                    /*params.put("appKey","wenba-pgpt");
+                    params.put("appSecret","50b410184aa25ef7edcf1a7dd7cd951d");
+                    params.put("thingId","25");
+                    params.put("tagId","20");
+                    params.put("indexStatus","0"); //可空
+                    params.put("name","Tina测试");	//可空
+                    params.put("objectId","21");*/
+
+                    //服务id
+                    params.put("appKey",map.get("appKey").toString());
+                    //服务mima
+                    params.put("appSecret",map.get("appSecret").toString());
+                    //类型id
+                    params.put("thingId",map.get("thingId").toString());
+                    //标签id
+                    //params.put("tagId",map.get("tagId").toString());
+                    //状态
+                    params.put("indexStatus",map.get("indexStatus").toString()); //可空
+                    //名称
+                    params.put("name",map.get("name").toString());	//可空
+                    //具体对象id
+                    params.put("objectId",map.get("objectId").toString());
+
+                    long startTime = System.currentTimeMillis();
+
+                    log.info("调用标签服务开始,请求参数: " + params.toString());
+
+                    String url = "http://10.1.58.29:8087/api/tag/put/on";
+
+                    String[] split = sb.toString().split(",");
+                    for(String s : split) {
+                        params.put("tagId",s);
+                        String result = HttpUtils.doPostStr(url, params, 5000, 5000, "UTF-8");
+                        log.info("调用标签服务结束,返回结果: " + result.toString());
+                    }
+                    long endTime = System.currentTimeMillis();
+                    log.info("标签服务 cost time:{} ms", endTime - startTime);
+
+
+
                 }
             }else {
                 dResult.setCode(-1);
@@ -141,7 +205,6 @@ public class ArrisExprServiceImpl implements ArrisExprService {
             dResult.setMsg("该ID:表达式不存在!");
             resultMap.put(id,dResult);
         }
-
         return resultMap;
     }
 

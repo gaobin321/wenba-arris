@@ -173,7 +173,6 @@ public class LexicalConstants {
 		keys.add("endif");
 		keys.add("var");
 		keys.add("while");
-		//keys.add("for");
 		keys.add("do");
 
 		/**

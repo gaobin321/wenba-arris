@@ -2,6 +2,8 @@ com/wenba/arris/expression/PrintExpression$1.class
 com/wenba/arris/expression/PrintExpression.class
 com/wenba/arris/AppTest.class
 com/wenba/arris/expression/TestSyntax.class
+com/wenba/arris/expression/TestLexical$2.class
 com/wenba/arris/expression/Printer.class
 com/wenba/arris/expression/CurrentDate.class
 com/wenba/arris/expression/TestLexical.class
+com/wenba/arris/expression/TestLexical$1.class

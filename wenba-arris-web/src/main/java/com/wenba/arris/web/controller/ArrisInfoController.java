@@ -71,7 +71,8 @@ public class ArrisInfoController {
             }
         }catch (Exception e) {
             e.printStackTrace();
-            System.out.println("selArrisInfoList exception: " + e.getMessage());
+            dataResult.setCode(-1);
+            dataResult.setMsg("fail");
         }
 
         long endTime = System.currentTimeMillis();
@@ -142,6 +143,8 @@ public class ArrisInfoController {
             }
         }catch (Exception e) {
             e.printStackTrace();
+            bResult.setCode(-1);
+            bResult.setMsg("fail");
         }
 
         long endTime = System.currentTimeMillis();
@@ -209,6 +212,8 @@ public class ArrisInfoController {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            bResult.setCode(-1);
+            bResult.setMsg("fail");
         }
 
 
@@ -277,6 +282,8 @@ public class ArrisInfoController {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            bResult.setCode(-1);
+            bResult.setMsg("fail");
         }
 
 

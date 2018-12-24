@@ -137,12 +137,22 @@ public class SyntaxAnalyzer {
 					throw new SyntaxException(currentToken);
 				break;
 			case EXECUTION:	//动作
-				if(conditionStack.top()) {
+				/**
+				 * 	原来
+				 */
+				/*if(conditionStack.top()) {
 					Executable executable = ((ExecutionToken)syntaxStackTop).getExecutable();
 					if(executable == null) //需要执行的是函数，从函数符号栈取出函数定义
 						executable = functionTokenStack.top().getFunction();
 					execute(executable);
-				}
+				}*/
+				/**
+				 * 	GB 修改
+				 */
+				Executable executable = ((ExecutionToken)syntaxStackTop).getExecutable();
+				if(executable == null) //需要执行的是函数，从函数符号栈取出函数定义
+					executable = functionTokenStack.top().getFunction();
+				execute(executable);
 				break;
 			case CONTEXT_OPERATION:	//上下文操作
 				try {

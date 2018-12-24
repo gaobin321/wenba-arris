@@ -49,9 +49,13 @@ public class SystemFunctions {
 	
 	static {
 		registerFunction(new Max());
+		registerFunction(new Min());
 		registerFunction(new Abs());
 		registerFunction(new Judge());
 		registerFunction(new Ifthen());
-		registerFunction(new For());
+		registerFunction(new Contains());
+		registerFunction(new StartsWith());
+		registerFunction(new EndsWith());
+		registerFunction(new Substring());
 	}
 }

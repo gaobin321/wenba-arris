@@ -24,7 +24,7 @@ public class Grammar {
 
 		ifStatement.addProduction(new TerminalToken[]{ifKey},
 								new Token[]{ifKey, leftBracket, bolExpression, ifConditionCo, rightBracket,
-											newContextCo, block, endContextCo,endIFCo, elseSection});
+											newContextCo, block, endContextCo, elseSection, endIFCo, endIfKey});
 		/**
 		 * 	GB
 		 * 	添加[如果-那么]中文关键字
